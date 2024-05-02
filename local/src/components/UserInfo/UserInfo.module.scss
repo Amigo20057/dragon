@@ -1,0 +1,30 @@
+.container {
+	width: 300px;
+	height: 34px;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+span {
+	width: 200px;
+
+	&:first-child {
+		font-weight: 500;
+		font-size: 18px;
+		margin-bottom: 5px;
+	}
+
+	&:nth-child(2) {
+		color: gray;
+	}
+}
+.userDetails {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+}
+
+.additional {
+	font-size: 12px;
+}

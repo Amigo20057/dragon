@@ -1,0 +1,42 @@
+.addPost {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 100px;
+}
+
+.title {
+	input {
+		font-size: 42px;
+		font-weight: 900;
+	}
+
+	div {
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
+}
+
+.text {
+	input {
+		height: 100px;
+	}
+}
+
+.vote {
+	margin-top: 20px;
+	width: 180px;
+	height: 25px;
+	font-size: 18px;
+	padding: 5px;
+}
+
+.buttons {
+	display: flex;
+	margin-top: 50px;
+	button {
+		margin-right: 15px;
+	}
+}

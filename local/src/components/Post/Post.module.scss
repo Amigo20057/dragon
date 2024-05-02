@@ -1,0 +1,150 @@
+.post {
+	position: relative;
+	width: 700px;
+	height: 250px;
+	margin: 100px;
+	background-color: #fff;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 15px;
+	border-radius: 10px;
+
+	& .editButtons {
+		width: 100%;
+		height: 40px;
+		display: flex;
+		justify-content: end;
+	}
+
+	& .indention h2 {
+		margin-top: 50px;
+
+		& a {
+			font-size: 34px;
+			color: #000;
+		}
+	}
+
+	& .postDetails {
+		& li {
+			display: flex;
+			align-items: center;
+			margin: 10px;
+
+			& button {
+				height: 100%;
+				width: 10%;
+				background: transparent;
+				border: none;
+				border-right: 1px solid #000;
+				transition: all 0.25s;
+
+				&:hover {
+					background-color: #269fe5;
+				}
+			}
+
+			&:nth-child(2) {
+				height: 40px;
+				border: 1px solid #000;
+
+				& .vote {
+					text-align: center;
+					width: 610px;
+					height: 40px;
+					/* background-color: #4462ec; */
+				}
+
+				& .vote span {
+					position: relative;
+					top: 5px;
+				}
+
+				& .vote span:first-child {
+					margin-top: 10px;
+					font-size: 25px;
+					margin: 10px;
+					color: #000;
+				}
+				& .vote span:nth-child(2) {
+					color: #000;
+					margin-top: 10px;
+					font-size: 25px;
+					margin: 10px;
+				}
+				& .vote span:nth-child(3) {
+					margin-top: 10px;
+					color: #000;
+					font-size: 25px;
+					margin: 10px;
+				}
+			}
+		}
+	}
+}
+
+.fullPost {
+	position: relative;
+	width: 1200px;
+	height: 550px;
+	margin: 100px;
+	background-color: #fff;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 15px;
+	border-radius: 10px;
+
+	.titleFull {
+		font-size: 40px;
+	}
+
+	.content {
+		font-size: 24px;
+		line-height: 40px;
+	}
+
+	.fullPostDetails li {
+		&:first-child {
+			margin-top: 10px;
+			margin-bottom: 150px;
+			display: flex;
+			align-items: center;
+
+			& span {
+				font-size: 20px;
+				color: #000;
+				margin-left: 10px;
+			}
+		}
+
+		&:nth-child(2) {
+			display: flex;
+			border: 1px solid #000;
+			height: 40px;
+
+			& button {
+				background: transparent;
+				width: 50px;
+				border: none;
+				border-right: 1px solid #000;
+			}
+			& span {
+				width: 100%;
+				height: 100%;
+
+				& .fullPostVote {
+					width: 100%;
+					height: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					& span {
+						font-size: 20px;
+						color: #000;
+						margin: 10px;
+					}
+				}
+			}
+		}
+		margin: 20px;
+	}
+}

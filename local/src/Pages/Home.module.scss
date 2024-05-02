@@ -1,0 +1,15 @@
+.filters {
+	position: absolute;
+	top: 90px;
+
+	& button {
+		width: 100px;
+		height: 30px;
+		color: #269fe7;
+		font-size: 17px;
+		border: none;
+		border-bottom: 1px solid #269fe7;
+		margin: 10px;
+		background: transparent;
+	}
+}
