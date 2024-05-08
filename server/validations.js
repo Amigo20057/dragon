@@ -14,5 +14,5 @@ export const registerValidation = [
 export const postCreateValidation = [
 	body('title', 'enter title').isLength({ min: 3 }).isString(),
 	body('text', 'enter text').isLength({ min: 10 }).isString(),
-	body('targetVote', 'enter target vote').isLength({ min: 10 }).isNumeric(),
+	body('targetVote', 'enter target vote').isLength({ min: 2 }).isString(),
 ]

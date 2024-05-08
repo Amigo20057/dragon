@@ -11,7 +11,7 @@ const PostSchema = new mongoose.Schema(
 			required: true,
 		},
 		targetVote: {
-			type: Number,
+			type: String,
 			required: true,
 		},
 		startVote: {

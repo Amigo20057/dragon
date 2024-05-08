@@ -1,16 +1,43 @@
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from '../../axios'
+import { selectIsAuth } from '../../redux/slices/auth'
 import styles from './AddPost.module.scss'
 
 export const AddPost = () => {
-	const [value, setValue] = useState('')
+	const navigate = useNavigate()
+	const isAuth = useSelector(selectIsAuth)
+	const [title, setTitle] = useState('')
+	const [text, setText] = useState('')
+	const [targetVote, setTargetVote] = useState('')
+	const [isLoading, setLoading] = useState(false)
 
-	const onChange = useCallback(value => {
-		setValue(value)
-	}, [])
+	const onSubmit = async () => {
+		try {
+			setLoading(true)
 
+			const fields = {
+				title,
+				text,
+				targetVote,
+			}
+
+			const { data } = await axios.post('/posts', fields)
+
+			const id = data._id
+
+			navigate(`/posts/${id}`)
+		} catch (err) {
+			console.warn(err)
+			alert('Помилка при створенні посту')
+		} finally {
+			setLoading(false) // Reset loading state
+		}
+	}
 	return (
 		<div className={styles.addPost}>
 			<Paper style={{ padding: 50, width: '60%' }}>
@@ -18,6 +45,8 @@ export const AddPost = () => {
 					classes={{ root: styles.title }}
 					variant='standard'
 					placeholder='Заголовок голосування...'
+					value={title}
+					onChange={e => setTitle(e.target.value)}
 					fullWidth
 				/>
 				<TextField
@@ -25,19 +54,23 @@ export const AddPost = () => {
 					variant='standard'
 					placeholder='Текст'
 					fullWidth
+					value={text}
+					onChange={e => setText(e.target.value)}
 				/>
 				<input
 					className={styles.vote}
-					type='number'
-					placeholder='Цель голосів'
+					type='text'
+					placeholder='Ціль голосів'
+					value={targetVote}
+					onChange={e => setTargetVote(e.target.value)}
 				/>
 				<div className={styles.buttons}>
-					<Button size='large' variant='contained'>
+					<Button onClick={onSubmit} size='large' variant='contained'>
 						Опублікувати
 					</Button>
-					<a href='/'>
+					<Link to='/'>
 						<Button size='large'>Відмінити</Button>
-					</a>
+					</Link>
 				</div>
 			</Paper>
 		</div>

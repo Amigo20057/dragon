@@ -28,11 +28,6 @@ export const Header = () => {
 							<input type='text' />
 							<Search />
 						</div>
-						{/* <div className={style.profile}>
-							<Link style={{ display: 'flex', alignItems: 'center' }} to='/me'>
-								<CircleUserRound size={36} color='#000' />
-							</Link>
-						</div> */}
 						<div
 							style={{
 								display: 'flex',

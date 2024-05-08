@@ -53,7 +53,7 @@ export const Post = ({
 					>
 						<li>
 							{isFullPost ? <Eye size='32px' /> : <Eye />}
-							<span>{viewsCount}</span>
+							<span style={{ marginLeft: '10px' }}>{viewsCount}</span>
 						</li>
 						<li>
 							<button

@@ -4,9 +4,19 @@
 	height: 250px;
 	margin: 100px;
 	background-color: #fff;
-	border-bottom: 1px solid #e0e0e0;
+	box-shadow: 0px 3px 12px 0px #000;
+	/* border-bottom: 1px solid #e0e0e0; */
 	padding: 15px;
 	border-radius: 10px;
+	transition: 0.25s;
+
+	.lucide {
+		color: #fff;
+	}
+
+	&:hover {
+		box-shadow: 0px 3px 12px 0px#269fe5;
+	}
 
 	& .editButtons {
 		width: 100%;
@@ -35,22 +45,28 @@
 				width: 10%;
 				background: transparent;
 				border: none;
-				border-right: 1px solid #000;
+				border-right: 2px solid #000;
 				transition: all 0.25s;
+				border-radius: 7px 0 0 7px;
 
 				&:hover {
 					background-color: #269fe5;
+				}
+				& .lucide:hover {
+					color: #fff;
 				}
 			}
 
 			&:nth-child(2) {
 				height: 40px;
-				border: 1px solid #000;
+				border: 2px solid #000;
+				border-radius: 10px;
 
 				& .vote {
 					text-align: center;
 					width: 610px;
 					height: 40px;
+					border-radius: 10px;
 					/* background-color: #4462ec; */
 				}
 
