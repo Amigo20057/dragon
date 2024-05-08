@@ -1,6 +1,8 @@
 import { Check, Eye, Pencil, Trash2 } from 'lucide-react'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchRemovePost } from '../../redux/slices/posts'
 import { UserInfo } from '../UserInfo/UserInfo'
 import style from './Post.module.scss'
 
@@ -16,6 +18,14 @@ export const Post = ({
 	isEditable,
 	isFullPost,
 }) => {
+	const dispatch = useDispatch()
+
+	const onClickRemove = () => {
+		if (window.confirm('Ви впевнені, що хочете видалити голосування?')) {
+			dispatch(fetchRemovePost(_id))
+		}
+	}
+
 	return (
 		<div className={!isFullPost ? style.post : style.fullPost}>
 			{isEditable && (
@@ -38,7 +48,7 @@ export const Post = ({
 					>
 						<Pencil color='#000' />
 					</Link>
-					<Trash2 />
+					<Trash2 onClick={onClickRemove} />
 				</div>
 			)}
 			<div className={style.wrapper}>

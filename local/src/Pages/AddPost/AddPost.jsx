@@ -1,20 +1,23 @@
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from '../../axios'
 import { selectIsAuth } from '../../redux/slices/auth'
 import styles from './AddPost.module.scss'
 
 export const AddPost = () => {
+	const { id } = useParams()
 	const navigate = useNavigate()
 	const isAuth = useSelector(selectIsAuth)
 	const [title, setTitle] = useState('')
 	const [text, setText] = useState('')
 	const [targetVote, setTargetVote] = useState('')
 	const [isLoading, setLoading] = useState(false)
+
+	const isEditing = Boolean(id)
 
 	const onSubmit = async () => {
 		try {
@@ -26,11 +29,13 @@ export const AddPost = () => {
 				targetVote,
 			}
 
-			const { data } = await axios.post('/posts', fields)
+			const { data } = isEditing
+				? await axios.patch(`/posts/${id}`, fields)
+				: await axios.post('/posts', fields)
 
-			const id = data._id
+			const _id = isEditing ? id : data._id
 
-			navigate(`/posts/${id}`)
+			navigate(`/posts/${_id}`)
 		} catch (err) {
 			console.warn(err)
 			alert('Помилка при створенні посту')
@@ -38,6 +43,23 @@ export const AddPost = () => {
 			setLoading(false) // Reset loading state
 		}
 	}
+
+	useEffect(() => {
+		if (id) {
+			axios
+				.get(`/posts/${id}`)
+				.then(({ data }) => {
+					setTitle(data.title)
+					setText(data.text)
+					setTargetVote(data.targetVote)
+				})
+				.catch(err => {
+					console.log(err)
+					alert('Помилка при отриманні посту')
+				})
+		}
+	}, [])
+
 	return (
 		<div className={styles.addPost}>
 			<Paper style={{ padding: 50, width: '60%' }}>
@@ -66,7 +88,7 @@ export const AddPost = () => {
 				/>
 				<div className={styles.buttons}>
 					<Button onClick={onSubmit} size='large' variant='contained'>
-						Опублікувати
+						{isEditing ? 'Зберегти' : 'Опублікувати'}
 					</Button>
 					<Link to='/'>
 						<Button size='large'>Відмінити</Button>
