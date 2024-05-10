@@ -27,6 +27,12 @@ const PostSchema = new mongoose.Schema(
 			ref: 'User',
 			required: true,
 		},
+		votedUsers: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'User',
+			},
+		],
 	},
 	{
 		timestamps: true,

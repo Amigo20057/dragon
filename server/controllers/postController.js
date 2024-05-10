@@ -108,21 +108,26 @@ export const update = async (req, res) => {
 
 export const vote = async (req, res) => {
 	try {
+		const userId = req.userId
 		const postId = req.params.id
 
-		const post = await PostModel.findByIdAndUpdate(
-			postId,
-			{ $inc: { startVote: 1 } },
-			{ new: true }
-		)
+		const post = await PostModel.findById(postId)
 
 		if (!post) {
-			return res.status(404).json({
-				message: 'Post not found',
-			})
+			return res.status(404).json({ message: 'Post not found' })
 		}
 
-		res.json(post)
+		if (post.votedUsers.includes(userId)) {
+			return res
+				.status(400)
+				.json({ message: 'User has already voted for this post' })
+		}
+
+		post.startVote += 1
+		post.votedUsers.push(userId)
+		await post.save()
+
+		res.json({ message: 'Vote successful' })
 	} catch (err) {
 		console.log(err)
 		res.status(500).json({

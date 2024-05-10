@@ -14,7 +14,8 @@ export const fetchRemovePost = createAsyncThunk(
 export const fetchVotePost = createAsyncThunk(
 	'posts/fetchVotePost',
 	async id => {
-		axios.patch(`/posts/${id}/vote`)
+		const response = await axios.patch(`/posts/${id}/vote`)
+		return response.data
 	}
 )
 

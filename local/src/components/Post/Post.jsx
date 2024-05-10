@@ -34,8 +34,12 @@ export const Post = ({
 
 	const onClickVote = async () => {
 		try {
-			await dispatch(fetchVotePost(id))
-			setLocalStartVote((localStartVote + 1).toString())
+			const response = await dispatch(fetchVotePost(id))
+			if (response.error) {
+				window.alert('Ви вже проголосували')
+			} else {
+				setLocalStartVote(localStartVote + 1)
+			}
 		} catch (error) {
 			console.error('Error voting for post:', error)
 		}
