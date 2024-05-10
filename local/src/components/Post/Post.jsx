@@ -119,14 +119,14 @@ export const Post = ({
 													position: 'absolute',
 													width: `calc((100% / ${targetVote}) * ${localStartVote})`,
 													height: '40px',
-													backgroundColor: '#4462ec',
+													backgroundColor: '#269fe7',
 													marginTop: '5px',
 											  }
 											: {
 													position: 'absolute',
 													width: `calc((100% / ${targetVote}) * ${localStartVote})`,
 													height: '100%',
-													backgroundColor: '#4462ec',
+													backgroundColor: '#269fe7',
 													zIndex: '1',
 											  }
 									}
