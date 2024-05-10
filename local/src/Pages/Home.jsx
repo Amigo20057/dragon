@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Post } from '../components/Post/Post'
 import style from './Home.module.scss'
@@ -10,7 +10,21 @@ export const Home = () => {
 	const userData = useSelector(state => state.auth.data)
 	const { posts } = useSelector(state => state.posts)
 
+	const [filter, setFilter] = useState('popular')
+
 	const isPostsLoading = posts.status === 'loading'
+
+	const sortedPosts = useMemo(() => {
+		if (filter === 'newest') {
+			return posts.items
+				.slice()
+				.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+		} else if (filter === 'popular') {
+			return posts.items.slice().sort((a, b) => b.viewsCount - a.viewsCount)
+		} else {
+			return posts.items
+		}
+	}, [filter, posts.items])
 
 	useEffect(() => {
 		dispatch(fetchPosts())
@@ -28,12 +42,21 @@ export const Home = () => {
 			}}
 		>
 			<div className={style.filters}>
-				<button>Нові</button>
-				<button>Популярні</button>
+				<button
+					className={filter === 'newest' ? style.newest : {}}
+					onClick={() => setFilter('newest')}
+				>
+					Нові
+				</button>
+				<button
+					className={filter === 'popular' ? style.popular : {}}
+					onClick={() => setFilter('popular')}
+				>
+					Популярні
+				</button>
 			</div>
 			<div className={style.posts}>
-				{/* {(isPostsLoading ? [...Array(5)] : posts.items).map((obj,index) => ( */}
-				{posts.items.map((obj, index) => (
+				{sortedPosts.map((obj, index) => (
 					<Post
 						key={index}
 						_id={obj._id}

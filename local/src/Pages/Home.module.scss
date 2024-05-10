@@ -8,8 +8,13 @@
 		color: #269fe7;
 		font-size: 17px;
 		border: none;
-		border-bottom: 1px solid #269fe7;
 		margin: 10px;
 		background: transparent;
+	}
+	.newest {
+		border-bottom: 2px solid #269fe7;
+	}
+	.popular {
+		border-bottom: 2px solid #269fe7;
 	}
 }

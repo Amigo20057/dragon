@@ -26,6 +26,15 @@ export const Post = ({
 	const isAuth = useSelector(selectIsAuth)
 	const { id } = useParams()
 
+	const createdAtDate = new Date(createdAt)
+
+	// Format the date and time parts separately
+	const formattedDate = createdAtDate.toLocaleDateString('en-US')
+	const formattedTime = createdAtDate.toLocaleTimeString('en-US')
+
+	// Combine the formatted date and time
+	const formattedCreatedAt = `${formattedDate} ${formattedTime}`
+
 	const onClickRemove = () => {
 		if (window.confirm('Ви впевнені, що хочете видалити голосування?')) {
 			dispatch(fetchRemovePost(_id))
@@ -71,7 +80,7 @@ export const Post = ({
 				</div>
 			)}
 			<div className={style.wrapper}>
-				<UserInfo {...user} additionalText={createdAt} />
+				<UserInfo {...user} additionalText={formattedCreatedAt} />
 				<div className={style.indention}>
 					<h2 className={!isFullPost ? style.title : style.titleFull}>
 						{isFullPost ? title : <Link to={`/posts/${_id}`}>{title}</Link>}
