@@ -1,8 +1,9 @@
 import { Check, Eye, Pencil, Trash2 } from 'lucide-react'
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { fetchRemovePost } from '../../redux/slices/posts'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
+import { selectIsAuth } from '../../redux/slices/auth'
+import { fetchRemovePost, fetchVotePost } from '../../redux/slices/posts'
 import { UserInfo } from '../UserInfo/UserInfo'
 import style from './Post.module.scss'
 
@@ -18,11 +19,25 @@ export const Post = ({
 	isEditable,
 	isFullPost,
 }) => {
+	const [localStartVote, setLocalStartVote] = useState(startVote)
+
 	const dispatch = useDispatch()
+
+	const isAuth = useSelector(selectIsAuth)
+	const { id } = useParams()
 
 	const onClickRemove = () => {
 		if (window.confirm('Ви впевнені, що хочете видалити голосування?')) {
 			dispatch(fetchRemovePost(_id))
+		}
+	}
+
+	const onClickVote = async () => {
+		try {
+			await dispatch(fetchVotePost(id))
+			setLocalStartVote((localStartVote + 1).toString())
+		} catch (error) {
+			console.error('Error voting for post:', error)
 		}
 	}
 
@@ -66,19 +81,22 @@ export const Post = ({
 							<span style={{ marginLeft: '10px' }}>{viewsCount}</span>
 						</li>
 						<li>
-							<button
-								style={{
-									display: 'flex',
-									alignItems: 'center',
-									justifyContent: 'center',
-								}}
-							>
-								<Check />
-							</button>
+							{isFullPost && isAuth && (
+								<button
+									onClick={onClickVote}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'center',
+									}}
+								>
+									<Check />
+								</button>
+							)}
 							<span>
 								<div className={!isFullPost ? style.vote : style.fullPostVote}>
 									<div>
-										<span>{startVote}</span>
+										<span>{localStartVote}</span>
 										<span>/</span>
 										<span>{targetVote}</span>
 									</div>

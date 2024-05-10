@@ -11,6 +11,12 @@ export const fetchRemovePost = createAsyncThunk(
 		axios.delete(`/posts/${id}`)
 	}
 )
+export const fetchVotePost = createAsyncThunk(
+	'posts/fetchVotePost',
+	async id => {
+		axios.patch(`/posts/${id}/vote`)
+	}
+)
 
 const initialState = {
 	posts: {
@@ -42,6 +48,19 @@ const postsSlice = createSlice({
 				state.posts.items = state.posts.items.filter(
 					obj => obj._id !== action.meta.arg
 				)
+			})
+
+			.addCase(fetchVotePost.fulfilled, (state, action) => {
+				const votedPost = state.posts.items.find(
+					post => post._id === action.meta.arg
+				)
+
+				if (votedPost) {
+					votedPost.startVote += 1
+				}
+			})
+			.addCase(fetchVotePost.rejected, (state, action) => {
+				state.posts.status = 'error'
 			})
 	},
 })

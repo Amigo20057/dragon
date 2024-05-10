@@ -61,6 +61,13 @@ app.patch(
 	PostController.update
 )
 
+app.patch(
+	'/posts/:id/vote',
+	checkAuth,
+	handleValidationErrors,
+	PostController.vote
+)
+
 app.listen(4444, err => {
 	if (err) {
 		return console.log(err)

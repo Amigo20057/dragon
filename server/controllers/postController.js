@@ -105,3 +105,28 @@ export const update = async (req, res) => {
 		})
 	}
 }
+
+export const vote = async (req, res) => {
+	try {
+		const postId = req.params.id
+
+		const post = await PostModel.findByIdAndUpdate(
+			postId,
+			{ $inc: { startVote: 1 } },
+			{ new: true }
+		)
+
+		if (!post) {
+			return res.status(404).json({
+				message: 'Post not found',
+			})
+		}
+
+		res.json(post)
+	} catch (err) {
+		console.log(err)
+		res.status(500).json({
+			message: 'Error voting for post',
+		})
+	}
+}
