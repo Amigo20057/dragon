@@ -113,7 +113,6 @@ export const Post = ({
 									</div>
 								</div>
 								<div
-									// className={style.progressBar}
 									style={
 										!isFullPost
 											? {
@@ -128,6 +127,7 @@ export const Post = ({
 													width: `calc((100% / ${targetVote}) * ${localStartVote})`,
 													height: '100%',
 													backgroundColor: '#4462ec',
+													zIndex: '1',
 											  }
 									}
 								></div>
