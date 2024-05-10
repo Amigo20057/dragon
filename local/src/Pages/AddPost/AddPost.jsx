@@ -40,7 +40,7 @@ export const AddPost = () => {
 			console.warn(err)
 			alert('Помилка при створенні посту')
 		} finally {
-			setLoading(false) // Reset loading state
+			setLoading(false)
 		}
 	}
 

@@ -27,12 +27,8 @@ export const Post = ({
 	const { id } = useParams()
 
 	const createdAtDate = new Date(createdAt)
-
-	// Format the date and time parts separately
 	const formattedDate = createdAtDate.toLocaleDateString('en-US')
 	const formattedTime = createdAtDate.toLocaleTimeString('en-US')
-
-	// Combine the formatted date and time
 	const formattedCreatedAt = `${formattedDate} ${formattedTime}`
 
 	const onClickRemove = () => {

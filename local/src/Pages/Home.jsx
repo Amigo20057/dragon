@@ -17,14 +17,12 @@ export const Home = ({ searchQuery, setSearchQuery }) => {
 	const sortedPosts = useMemo(() => {
 		let filteredPosts = posts.items
 
-		// Filter by search query
 		if (searchQuery.trim() !== '') {
 			filteredPosts = filteredPosts.filter(post =>
 				post.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
 			)
 		}
 
-		// Sort by filter
 		if (filter === 'newest') {
 			return filteredPosts
 				.slice()
