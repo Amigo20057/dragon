@@ -15,9 +15,9 @@ export const Registration = () => {
 		formState: { errors, isValid },
 	} = useForm({
 		defaultValues: {
-			fullName: 'Denys Ryzhuk',
-			email: 'ad@ad.ad',
-			password: '123',
+			fullName: '',
+			email: '',
+			password: '',
 		},
 		mode: 'onChange',
 	})
@@ -43,8 +43,8 @@ export const Registration = () => {
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<input
 						{...register('fullName', { required: `Вкажіть повне ім'я` })}
+						placeholder={`Повне ім'я`}
 						type='text'
-						placeholder='Повне імя'
 					/>
 					<input
 						{...register('email', { required: 'Вкажіть почту' })}

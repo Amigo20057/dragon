@@ -38,7 +38,7 @@ export const Home = ({ searchQuery, setSearchQuery }) => {
 
 	useEffect(() => {
 		dispatch(fetchPosts())
-	}, [dispatch])
+	}, [dispatch, filter])
 
 	console.log(posts)
 
