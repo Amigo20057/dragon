@@ -5,7 +5,7 @@ import style from './Home.module.scss'
 
 import { fetchPosts } from '../redux/slices/posts'
 
-export const Home = () => {
+export const Home = ({ searchQuery, setSearchQuery }) => {
 	const dispatch = useDispatch()
 	const userData = useSelector(state => state.auth.data)
 	const { posts } = useSelector(state => state.posts)
@@ -15,16 +15,26 @@ export const Home = () => {
 	const isPostsLoading = posts.status === 'loading'
 
 	const sortedPosts = useMemo(() => {
+		let filteredPosts = posts.items
+
+		// Filter by search query
+		if (searchQuery.trim() !== '') {
+			filteredPosts = filteredPosts.filter(post =>
+				post.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
+			)
+		}
+
+		// Sort by filter
 		if (filter === 'newest') {
-			return posts.items
+			return filteredPosts
 				.slice()
 				.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 		} else if (filter === 'popular') {
-			return posts.items.slice().sort((a, b) => b.viewsCount - a.viewsCount)
+			return filteredPosts.slice().sort((a, b) => b.viewsCount - a.viewsCount)
 		} else {
-			return posts.items
+			return filteredPosts
 		}
-	}, [filter, posts.items])
+	}, [filter, posts.items, searchQuery])
 
 	useEffect(() => {
 		dispatch(fetchPosts())

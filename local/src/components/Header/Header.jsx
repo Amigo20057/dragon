@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { logout, selectIsAuth } from '../../redux/slices/auth'
 import style from './Header.module.scss'
 
-export const Header = () => {
+export const Header = ({ searchQuery, setSearchQuery }) => {
 	const dispatch = useDispatch()
 	const isAuth = useSelector(selectIsAuth)
 
@@ -25,7 +25,11 @@ export const Header = () => {
 				{isAuth ? (
 					<>
 						<div className={style.search}>
-							<input type='text' />
+							<input
+								type='text'
+								value={searchQuery}
+								onChange={e => setSearchQuery(e.target.value)}
+							/>
 							<Search />
 						</div>
 						<div
