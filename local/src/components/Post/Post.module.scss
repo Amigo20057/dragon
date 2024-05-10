@@ -60,9 +60,9 @@
 			&:nth-child(2) {
 				height: 40px;
 				border: 2px solid #000;
-				border-radius: 10px;
 
 				& .vote {
+					position: absolute;
 					display: flex;
 					align-items: center;
 					justify-content: center;
@@ -70,6 +70,7 @@
 					height: 40px;
 					border-radius: 10px;
 					/* background-color: #4462ec; */
+					z-index: 1;
 				}
 
 				& .vote span {
@@ -108,7 +109,6 @@
 	background-color: #fff;
 	border-bottom: 1px solid #e0e0e0;
 	padding: 15px;
-	border-radius: 10px;
 
 	.titleFull {
 		font-size: 40px;
@@ -135,17 +135,15 @@
 
 		&:nth-child(2) {
 			display: flex;
-			border: 1px solid #000;
+			border: 2px solid #000;
 			height: 50px;
-			border-radius: 20px;
 
 			& button {
 				background: transparent;
 				width: 100px;
 				border: none;
-				border-right: 1px solid #000;
+				border-right: 2px solid #000;
 				transition: 0.25s;
-				border-radius: 20px 0 0 20px;
 
 				&:hover {
 					background-color: #269fe5;
@@ -166,6 +164,14 @@
 						font-size: 20px;
 						color: #000;
 						margin: 10px;
+					}
+
+					.progressBar {
+						position: absolute;
+						height: 100%;
+						background-color: red;
+						border-radius: 19px;
+						margin-top: 0px;
 					}
 				}
 			}

@@ -97,7 +97,14 @@ export const Post = ({
 									<Check />
 								</button>
 							)}
-							<span>
+							<span
+								style={{
+									width: '100%',
+									position: 'relative',
+									display: 'flex',
+									alignItems: 'center',
+								}}
+							>
 								<div className={!isFullPost ? style.vote : style.fullPostVote}>
 									<div>
 										<span>{localStartVote}</span>
@@ -105,6 +112,25 @@ export const Post = ({
 										<span>{targetVote}</span>
 									</div>
 								</div>
+								<div
+									// className={style.progressBar}
+									style={
+										!isFullPost
+											? {
+													position: 'absolute',
+													width: `calc((100% / ${targetVote}) * ${localStartVote})`,
+													height: '40px',
+													backgroundColor: '#4462ec',
+													marginTop: '5px',
+											  }
+											: {
+													position: 'absolute',
+													width: `calc((100% / ${targetVote}) * ${localStartVote})`,
+													height: '100%',
+													backgroundColor: '#4462ec',
+											  }
+									}
+								></div>
 							</span>
 						</li>
 					</ul>
